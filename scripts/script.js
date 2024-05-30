@@ -32,7 +32,7 @@ function generateGrid(rowNum) {
         row.setAttribute("id", `row${i}`);
         container.appendChild(row);
         for (let j = 1; j <= rowNum; j++) {
-            let name = `cell${i}${j}`;
+            let name = `${i}-${j}`;
             const cell = document.createElement("div");
             cell.setAttribute("class", "cell");
             cell.setAttribute("id", `row${i}`);
