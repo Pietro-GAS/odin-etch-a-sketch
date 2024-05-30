@@ -16,7 +16,12 @@ btnNew.addEventListener("click", () => {
         });
         container.removeChild(row);
     });
-    let rowNum = prompt("How many rows?");
+    let rowNum = prompt("How many rows? (Min: 1, Max: 100)");
+    if (rowNum <= 0) {
+        rowNum = prompt("Please select a positive number of rows.");
+    } else if (rowNum > 100) {
+        rowNum = prompt("Please select a number lower than 100.")
+    }
     generateGrid(rowNum);
 });
 
