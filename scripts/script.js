@@ -1,6 +1,7 @@
 const body = document.querySelector("body");
 const commands = document.querySelector(".commands")
 const container = document.querySelector(".container");
+let style;
 
 const btnNew = document.createElement("button");
 btnNew.setAttribute("class", "button-new");
@@ -10,7 +11,17 @@ const btnErase = document.createElement("button");
 btnErase.setAttribute("class", "button-erase");
 btnErase.textContent = "Clear All";
 
+const btnBlack = document.createElement("button");
+btnBlack.setAttribute("class", "button-black");
+btnBlack.textContent = "Black";
+
+const btnRainbow = document.createElement("button");
+btnRainbow.setAttribute("class", "button-rainbow");
+btnRainbow.textContent = "Rainbow";
+
 commands.appendChild(btnNew);
+commands.appendChild(btnBlack);
+commands.appendChild(btnRainbow);
 commands.appendChild(btnErase);
 
 btnNew.addEventListener("click", () => {
@@ -32,14 +43,38 @@ btnNew.addEventListener("click", () => {
     generateGrid(rowNum);
 });
 
+btnBlack.addEventListener("click", () => {
+    btnRainbow.removeAttribute("disabled");
+    style = "black";
+    const hovered = document.querySelectorAll(".hovered");
+    hovered.forEach((cell) => {
+        cell.style.backgroundColor = style;
+    });
+    btnBlack.setAttribute("disabled", "disabled");
+});
+
+btnRainbow.addEventListener("click", () => {
+    btnBlack.removeAttribute("disabled");
+    style = "red";
+    const hovered = document.querySelectorAll(".hovered");
+    hovered.forEach((cell) => {
+        cell.style.backgroundColor = style;
+    });
+    btnRainbow.setAttribute("disabled", "disabled");
+});
+
 btnErase.addEventListener("click", () => {
     const cells = document.querySelectorAll(".cell");
     cells.forEach((cell) => {
-        cell.classList.remove("hovered");
+        cell.style.backgroundColor = "";
+        cell.className = "cell";
     });
 });
 
 function generateGrid(rowNum) {
+    style = "black";
+    btnBlack.setAttribute("disabled", "disabled");
+    btnRainbow.removeAttribute("disabled");
     for (let i = 1; i <= rowNum; i++) {
         const row = document.createElement("div");
         row.setAttribute("class", "row");
@@ -57,6 +92,7 @@ function generateGrid(rowNum) {
     const cells = document.querySelectorAll(".cell");
     cells.forEach((cell) => {
         cell.addEventListener("mouseenter", () => {
+            cell.style.backgroundColor = style;
             cell.classList.add("hovered");
         });
         /*
@@ -67,18 +103,6 @@ function generateGrid(rowNum) {
         */
     });
 }
-
-//generateGrid(16);
-
-const cells = document.querySelectorAll(".cell");
-cells.forEach((cell) => {
-    cell.addEventListener("mouseenter", () => {
-        cell.classList.add("hovered");
-    });
-    cell.addEventListener("mouseleave", () => {
-        cell.classList.remove("hovered");
-    });
-});
 
 body.appendChild(commands);
 body.appendChild(container);
