@@ -1,11 +1,18 @@
 const body = document.querySelector("body");
-const container = document.querySelector("#container");
+const commands = document.querySelector(".commands")
+const container = document.querySelector(".container");
 
 const btnNew = document.createElement("button");
 btnNew.setAttribute("class", "button-new");
 btnNew.textContent = "New Sketchpad";
 
-body.appendChild(btnNew);
+const btnErase = document.createElement("button");
+btnErase.setAttribute("class", "button-erase");
+btnErase.textContent = "Clear All";
+
+commands.appendChild(btnNew);
+commands.appendChild(btnErase);
+
 btnNew.addEventListener("click", () => {
     const rows = document.querySelectorAll(".row");
     rows.forEach((row) => {
@@ -23,6 +30,13 @@ btnNew.addEventListener("click", () => {
         rowNum = prompt("Please select a number lower than 100.")
     }
     generateGrid(rowNum);
+});
+
+btnErase.addEventListener("click", () => {
+    const cells = document.querySelectorAll(".cell");
+    cells.forEach((cell) => {
+        cell.classList.remove("hovered");
+    });
 });
 
 function generateGrid(rowNum) {
@@ -45,9 +59,12 @@ function generateGrid(rowNum) {
         cell.addEventListener("mouseenter", () => {
             cell.classList.add("hovered");
         });
+        /*
         cell.addEventListener("mouseleave", () => {
             cell.classList.remove("hovered");
+            cell.classList.add("trail");
         });
+        */
     });
 }
 
@@ -63,6 +80,7 @@ cells.forEach((cell) => {
     });
 });
 
+body.appendChild(commands);
 body.appendChild(container);
 
 document.addEventListener("DOMContentLoaded", () => {
