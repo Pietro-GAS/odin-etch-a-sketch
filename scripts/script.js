@@ -2,6 +2,7 @@ const body = document.querySelector("body");
 const commands = document.querySelector(".commands")
 const container = document.querySelector(".container");
 let bckgrColor;
+let opacity;
 
 const btnNew = document.createElement("button");
 btnNew.setAttribute("class", "button-new");
@@ -21,7 +22,7 @@ btnRainbow.textContent = "Rainbow";
 
 const btnShade = document.createElement("button");
 btnShade.setAttribute("class", "button-shade");
-btnRainbow.textContent = "Shading";
+btnShade.textContent = "Shading";
 
 commands.appendChild(btnNew);
 commands.appendChild(btnBlack);
@@ -50,22 +51,41 @@ btnNew.addEventListener("click", () => {
 
 btnBlack.addEventListener("click", () => {
     btnRainbow.removeAttribute("disabled");
+    btnShade.removeAttribute("disabled");
     bckgrColor = "black";
+    opacity = 0.1;
     const hovered = document.querySelectorAll(".hovered");
     hovered.forEach((cell) => {
         cell.style.backgroundColor = bckgrColor;
+        cell.style.opacity = opacity;
     });
     btnBlack.setAttribute("disabled", "disabled");
 });
 
 btnRainbow.addEventListener("click", () => {
     btnBlack.removeAttribute("disabled");
+    btnShade.removeAttribute("disabled");
     bckgrColor = "red";
+    opacity = 1;
     const hovered = document.querySelectorAll(".hovered");
     hovered.forEach((cell) => {
         cell.style.backgroundColor = bckgrColor;
+        cell.style.opacity = opacity;
     });
     btnRainbow.setAttribute("disabled", "disabled");
+});
+
+btnShade.addEventListener("click", () => {
+    btnBlack.removeAttribute("disabled");
+    btnBlack.removeAttribute("disabled");
+    bckgrColor = "black";
+    opacity = 0.1;
+    const hovered = document.querySelectorAll(".hovered");
+    hovered.forEach((cell) => {
+        cell.style.backgroundColor = bckgrColor;
+        cell.style.opacity = opacity;
+    });
+    btnShade.setAttribute("disabled", "disabled");
 });
 
 btnErase.addEventListener("click", () => {
@@ -78,8 +98,10 @@ btnErase.addEventListener("click", () => {
 
 function generateGrid(rowNum) {
     bckgrColor = "black";
+    opacity = 1;
     btnBlack.setAttribute("disabled", "disabled");
     btnRainbow.removeAttribute("disabled");
+    btnShade.removeAttribute("disabled");
     for (let i = 1; i <= rowNum; i++) {
         const row = document.createElement("div");
         row.setAttribute("class", "row");
@@ -98,6 +120,7 @@ function generateGrid(rowNum) {
     cells.forEach((cell) => {
         cell.addEventListener("mouseenter", () => {
             cell.style.backgroundColor = bckgrColor;
+            cell.style.opacity = opacity;
             cell.classList.add("hovered");
         });
         /*
