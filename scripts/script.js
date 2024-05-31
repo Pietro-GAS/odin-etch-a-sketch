@@ -1,7 +1,7 @@
 const body = document.querySelector("body");
 const commands = document.querySelector(".commands")
 const container = document.querySelector(".container");
-let style;
+let bckgrColor;
 
 const btnNew = document.createElement("button");
 btnNew.setAttribute("class", "button-new");
@@ -45,20 +45,20 @@ btnNew.addEventListener("click", () => {
 
 btnBlack.addEventListener("click", () => {
     btnRainbow.removeAttribute("disabled");
-    style = "black";
+    bckgrColor = "black";
     const hovered = document.querySelectorAll(".hovered");
     hovered.forEach((cell) => {
-        cell.style.backgroundColor = style;
+        cell.style.backgroundColor = bckgrColor;
     });
     btnBlack.setAttribute("disabled", "disabled");
 });
 
 btnRainbow.addEventListener("click", () => {
     btnBlack.removeAttribute("disabled");
-    style = "red";
+    bckgrColor = "red";
     const hovered = document.querySelectorAll(".hovered");
     hovered.forEach((cell) => {
-        cell.style.backgroundColor = style;
+        cell.style.backgroundColor = bckgrColor;
     });
     btnRainbow.setAttribute("disabled", "disabled");
 });
@@ -72,7 +72,7 @@ btnErase.addEventListener("click", () => {
 });
 
 function generateGrid(rowNum) {
-    style = "black";
+    bckgrColor = "black";
     btnBlack.setAttribute("disabled", "disabled");
     btnRainbow.removeAttribute("disabled");
     for (let i = 1; i <= rowNum; i++) {
@@ -92,7 +92,7 @@ function generateGrid(rowNum) {
     const cells = document.querySelectorAll(".cell");
     cells.forEach((cell) => {
         cell.addEventListener("mouseenter", () => {
-            cell.style.backgroundColor = style;
+            cell.style.backgroundColor = bckgrColor;
             cell.classList.add("hovered");
         });
         /*
