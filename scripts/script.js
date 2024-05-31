@@ -30,6 +30,19 @@ commands.appendChild(btnRainbow);
 commands.appendChild(btnShade);
 commands.appendChild(btnErase);
 
+function randomColor() {
+    let letters = '0123456789ABCDEF';
+    let color = '#';
+    for (let i = 0; i < 6; i++) {
+      color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+  }
+
+function setRandomColor() {
+    bckgrColor = randomColor();
+}
+
 btnNew.addEventListener("click", () => {
     const rows = document.querySelectorAll(".row");
     rows.forEach((row) => {
@@ -52,8 +65,12 @@ btnNew.addEventListener("click", () => {
 btnBlack.addEventListener("click", () => {
     btnRainbow.removeAttribute("disabled");
     btnShade.removeAttribute("disabled");
+    const cells = document.querySelectorAll(".cell");
+    cells.forEach((cell) => {
+        cell.removeEventListener("mouseenter", setRandomColor);
+    });
     bckgrColor = "black";
-    opacity = 0.1;
+    opacity = 1;
     const hovered = document.querySelectorAll(".hovered");
     hovered.forEach((cell) => {
         cell.style.backgroundColor = bckgrColor;
@@ -65,10 +82,14 @@ btnBlack.addEventListener("click", () => {
 btnRainbow.addEventListener("click", () => {
     btnBlack.removeAttribute("disabled");
     btnShade.removeAttribute("disabled");
-    bckgrColor = "red";
+    const cells = document.querySelectorAll(".cell");
+    cells.forEach((cell) => {
+        cell.addEventListener("mouseenter", setRandomColor);
+    });
     opacity = 1;
     const hovered = document.querySelectorAll(".hovered");
     hovered.forEach((cell) => {
+        bckgrColor = randomColor();
         cell.style.backgroundColor = bckgrColor;
         cell.style.opacity = opacity;
     });
@@ -78,6 +99,10 @@ btnRainbow.addEventListener("click", () => {
 btnShade.addEventListener("click", () => {
     btnBlack.removeAttribute("disabled");
     btnBlack.removeAttribute("disabled");
+    const cells = document.querySelectorAll(".cell");
+    cells.forEach((cell) => {
+        cell.removeEventListener("mouseenter", setRandomColor);
+    });
     bckgrColor = "black";
     opacity = 0.1;
     const hovered = document.querySelectorAll(".hovered");
