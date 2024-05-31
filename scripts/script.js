@@ -19,9 +19,14 @@ const btnRainbow = document.createElement("button");
 btnRainbow.setAttribute("class", "button-rainbow");
 btnRainbow.textContent = "Rainbow";
 
+const btnShade = document.createElement("button");
+btnShade.setAttribute("class", "button-shade");
+btnRainbow.textContent = "Shading";
+
 commands.appendChild(btnNew);
 commands.appendChild(btnBlack);
 commands.appendChild(btnRainbow);
+commands.appendChild(btnShade);
 commands.appendChild(btnErase);
 
 btnNew.addEventListener("click", () => {
